@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from './api';
+import { GovBanner } from '@trussworks/react-uswds';
 
 const App: React.FC = () => {
   const [expenses, setExpenses] = useState<any | null>(null);
@@ -37,6 +38,7 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <GovBanner />
       <h1>Expense Service Response: /expenses/user</h1>
       {expenses ? (
         <pre>{JSON.stringify(expenses, null, 2)}</pre>
