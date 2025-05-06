@@ -1,7 +1,12 @@
 // src/api.ts
 import axios from 'axios';
 
-const api = axios.create();
+const api = axios.create({
+  validateStatus(status) {
+    // don't accept redirect codes as valid
+    return status >= 200 && status < 300
+  },
+});
 
 if (import.meta.env.DEV) {
   const token = import.meta.env.VITE_DEV_BEARER_TOKEN;
