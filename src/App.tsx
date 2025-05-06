@@ -6,7 +6,6 @@ const App: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [profile, setProfile] = useState<any | null>(null);
   const [expenses, setExpenses] = useState<any | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     api
@@ -16,7 +15,6 @@ const App: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
-        setError('Failed to fetch expenses');
       });
   }, []);
 
@@ -60,7 +58,6 @@ const App: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
-        setError('Logout failed');
       });
   };
 
@@ -70,13 +67,12 @@ const App: React.FC = () => {
       <h1>Expense Service Response: /expenses/user</h1>
       {expenses ? (
         <pre>{JSON.stringify(expenses, null, 2)}</pre>
-      ) : error ? (
-        <p>Error :(</p>
       ) : (
-        <p>Loading...</p>
+        <p>No valid response from expense service, are you signed in? :(</p>
       )}
+
+      <h1>User Profile Response: /api/me</h1>
       {/* Show and hide these depending on if the user is signed in or not */}
-      <h1>User Profile Response: /expenses/user</h1>
       {authenticated ? (
         <div>
           <pre>{JSON.stringify(profile, null, 2)}</pre>
